@@ -1,0 +1,20 @@
+#container{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: 100px;
+    width: 100px;
+    border: 1px solid green;
+}
+
+.box{
+    /* height: 20px;
+    width: 20px; */
+    /* border: 1px solid blue; */
+    margin: 0;
+    padding: 0;
+}
+
+.hovered{
+    background-color: red;    
+}

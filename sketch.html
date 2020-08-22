@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>Page title</title> 
+    <link rel="stylesheet" href="style.css"> 
+</head> 
+<body>
+<div id="container">
+    <!-- <div class="box"></div>
+    <div class="box"></div>    
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>    
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>    
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>    
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>    
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>    
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>     -->
+
+</div>
+<script>
+    // let container = document.getElementById("container");    
+    // let n = 4;
+    // for (i=0; i<n; i++){
+    //     for (j=1; j<n; j++){
+    //         console.log("&");
+    //     }
+    //     console.log("*");
+    // }
+    let n = 10;
+    let container = document.getElementById('container');
+    let containerArea = n*n;
+    let boxSide = 100/n+"px";
+
+    function drawBoxes(){
+        for (i=0; i<containerArea; i++){
+            let div = document.createElement("div");
+            div.className = "box";
+            div.style.height = boxSide;
+            div.style.width = boxSide;
+            container.append(div);
+        }
+    }
+
+    drawBoxes();
+
+    function highlightBox(e){
+        e.target.classList.add('hovered')
+    }
+
+    let boxes = Array.from(document.querySelectorAll('.box'));
+    boxes.forEach(box => box.addEventListener('mouseenter', highlightBox));
+
+</script> 
+</body> 
+</html> 
