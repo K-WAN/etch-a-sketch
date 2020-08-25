@@ -6,19 +6,37 @@
     <link rel="stylesheet" href="style.css"> 
 </head> 
 <body>
+<p>Default Box: 10 x 10</p>
 <div id="container"></div>
 <div class="button-controller">
     <button type="button" id="reset">RESET</button>
+    <button type="button" id="changeBoxesCount">Change</button>
 </div>
 <script>    
-    function drawBoxes(){
+    function changeBoxesCount(){
+        boxCount = parseInt(prompt("Please insert the new box count"));
+        clearBoxes();           
+        drawBoxes(boxCount);    
+        markBoxes();            
+    }
+
+    function clearBoxes(){
+        while (container.firstChild){
+            container.firstChild.remove();
+        }
+    }
+
+    function drawBoxes(boxCount){
+        let containerArea = boxCount*boxCount;
+        let boxSide = 100/boxCount+"px";
+        console.log("drawBoxes "+boxCount+" "+containerArea+" "+boxSide)
         for (i=0; i<containerArea; i++){
             let div = document.createElement("div");
             div.className = "box";
             div.style.height = boxSide;
             div.style.width = boxSide;
             container.append(div);
-        }
+        }        
     }    
 
     function highlightBox(e){
@@ -26,22 +44,27 @@
     }
 
     function resetBoxes(e){
-        boxes.forEach(box => box.classList.remove('hovered'));
+        let boxes = Array.from(document.querySelectorAll('.box'));
+        boxes.forEach(box => box.classList.remove('hovered')); 
     }
 
-    let n = 10;
-    let container = document.getElementById('container');
-    let containerArea = n*n;
-    let boxSide = 100/n+"px";
+    function markBoxes(){
+        let boxes = Array.from(document.querySelectorAll('.box'));
+        boxes.forEach(box => box.addEventListener('mouseenter', highlightBox));
+    }
 
-    drawBoxes();   
+    let boxCount = 10; //default
+    let container = document.getElementById('container');    
 
-    let boxes = Array.from(document.querySelectorAll('.box'));
-    boxes.forEach(box => box.addEventListener('mouseenter', highlightBox));
+    drawBoxes(boxCount);   
+    
+    markBoxes();
 
     let reset = document.getElementById('reset');
     reset.addEventListener('click', resetBoxes);
 
+    let change = document.getElementById('changeBoxesCount');
+    change.addEventListener('click', changeBoxesCount);
 </script> 
 </body> 
 </html> 
