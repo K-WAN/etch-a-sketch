@@ -13,9 +13,7 @@
     padding: 0;
 }
 
-.hovered{
-    background-color: red;    
-}
+.hovered{}
 
 .button-controller {
     margin: 20px;

@@ -11,13 +11,21 @@
 <div class="button-controller">
     <button type="button" id="reset">RESET</button>
     <button type="button" id="changeBoxesCount">Change</button>
+    <input type="color" id="colorChange">    
 </div>
 <script>    
     function changeBoxesCount(){
-        boxCount = parseInt(prompt("Please insert the new box count"));
-        clearBoxes();           
-        drawBoxes(boxCount);    
-        markBoxes();            
+        let newBoxCount = prompt("Please insert the new box count");  
+        // if (isNaN(parseInt(newBoxCount))){
+        //     alert("Please input numbers");
+        // } else {
+            if (newBoxCount !== null){
+                boxCount = parseInt(newBoxCount);
+                clearBoxes();           
+                drawBoxes(boxCount);    
+                markBoxes();    
+            }                
+        // }        
     }
 
     function clearBoxes(){
@@ -40,18 +48,41 @@
     }    
 
     function highlightBox(e){
-        e.target.classList.add('hovered')
+        e.target.classList.add('hovered');
+        e.target.style.backgroundColor = defaultColor;
     }
 
     function resetBoxes(e){
         let boxes = Array.from(document.querySelectorAll('.box'));
-        boxes.forEach(box => box.classList.remove('hovered')); 
+        boxes.forEach(function(box){
+            box.classList.remove('hovered');
+            box.style.backgroundColor = null;
+        });
     }
 
     function markBoxes(){
         let boxes = Array.from(document.querySelectorAll('.box'));
         boxes.forEach(box => box.addEventListener('mouseenter', highlightBox));
     }
+
+    function startup() {
+        coloring = document.querySelector("#colorChange");
+        coloring.value = defaultColor;
+        coloring.addEventListener("input", updateColor, false);
+    }
+
+    function updateColor(event) {
+        let hover = Array.from(document.querySelectorAll('.hovered'));
+        hover.forEach(function(hovered) {
+            hovered.style.backgroundColor = event.target.value;
+            defaultColor = event.target.value;
+        });
+    }
+
+    let coloring;
+    let defaultColor = "#FF0000";
+
+    window.addEventListener("load", startup, false);
 
     let boxCount = 10; //default
     let container = document.getElementById('container');    
