@@ -16,16 +16,18 @@
 <script>    
     function changeBoxesCount(){
         let newBoxCount = prompt("Please insert the new box count");  
-        // if (isNaN(parseInt(newBoxCount))){
-        //     alert("Please input numbers");
-        // } else {
-            if (newBoxCount !== null){
+        if (newBoxCount === ""){
+            alert("Input can't be empty");
+        } else if (newBoxCount){
+            if (isNaN(parseInt(newBoxCount))){
+                alert("Please only input numbers");
+            } else {
                 boxCount = parseInt(newBoxCount);
                 clearBoxes();           
                 drawBoxes(boxCount);    
-                markBoxes();    
-            }                
-        // }        
+                markBoxes(); 
+            }            
+        }
     }
 
     function clearBoxes(){
