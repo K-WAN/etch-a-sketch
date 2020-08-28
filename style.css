@@ -3,8 +3,8 @@
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    height: 100px;
-    width: 100px;
+    height: 400px;
+    width: 400px;
     border: 1px solid green;
 }
 
@@ -12,8 +12,6 @@
     margin: 0;
     padding: 0;
 }
-
-.hovered{}
 
 .button-controller {
     margin: 20px;

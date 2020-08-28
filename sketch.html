@@ -25,7 +25,8 @@
                 boxCount = parseInt(newBoxCount);
                 clearBoxes();           
                 drawBoxes(boxCount);    
-                markBoxes(); 
+                markBoxes();
+                boxCountText(boxCount);
             }            
         }
     }
@@ -38,8 +39,8 @@
 
     function drawBoxes(boxCount){
         let containerArea = boxCount*boxCount;
-        let boxSide = 100/boxCount+"px";
-        console.log("drawBoxes "+boxCount+" "+containerArea+" "+boxSide)
+        let containerHeight = document.getElementById("container").clientHeight;
+        let boxSide = containerHeight/boxCount+"px";
         for (i=0; i<containerArea; i++){
             let div = document.createElement("div");
             div.className = "box";
@@ -67,7 +68,7 @@
         boxes.forEach(box => box.addEventListener('mouseenter', highlightBox));
     }
 
-    function startup() {
+    function startupColor() {
         coloring = document.querySelector("#colorChange");
         coloring.value = defaultColor;
         coloring.addEventListener("input", updateColor, false);
@@ -81,10 +82,15 @@
         });
     }
 
+    function boxCountText(boxCount){
+        let p = document.querySelector('p');
+        p.innerHTML = `Current box : ${boxCount} x ${boxCount}`;
+    }
+
     let coloring;
     let defaultColor = "#FF0000";
 
-    window.addEventListener("load", startup, false);
+    window.addEventListener("load", startupColor, false);
 
     let boxCount = 10; //default
     let container = document.getElementById('container');    
