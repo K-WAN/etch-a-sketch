@@ -11,7 +11,8 @@
 <div class="button-controller">
     <button type="button" id="reset">RESET</button>
     <button type="button" id="changeBoxesCount">Change</button>
-    <input type="color" id="colorChange">    
+    <input type="color" id="colorChange">
+    <button type="button" id="randomColor">Random</button>
 </div>
 <script>    
     function changeBoxesCount(){
@@ -52,7 +53,11 @@
 
     function highlightBox(e){
         e.target.classList.add('hovered');
-        e.target.style.backgroundColor = defaultColor;
+        if (randomToggle){
+            e.target.style.backgroundColor = "#"+Math.floor(Math.random()*16777215).toString(16);
+        } else {
+            e.target.style.backgroundColor = defaultColor;
+        }
     }
 
     function resetBoxes(e){
@@ -87,8 +92,14 @@
         p.innerHTML = `Current box : ${boxCount} x ${boxCount}`;
     }
 
+    function toggleRandom(){
+        randomToggle = !randomToggle;
+        console.log("a"+randomToggle);
+    }
+
     let coloring;
     let defaultColor = "#FF0000";
+    let randomToggle = false; //default
 
     window.addEventListener("load", startupColor, false);
 
@@ -104,6 +115,9 @@
 
     let change = document.getElementById('changeBoxesCount');
     change.addEventListener('click', changeBoxesCount);
+
+    let random = document.getElementById('randomColor');
+    random.addEventListener('click', toggleRandom);
 </script> 
 </body> 
 </html> 
