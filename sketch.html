@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css"> 
 </head> 
 <body>
-<p>Default Box: 10 x 10</p>
+<p>Default Box: 10 x 10 Randomize OFF</p>
 <div id="container"></div>
 <div class="button-controller">
     <button type="button" id="reset">RESET</button>
@@ -52,7 +52,12 @@
     }    
 
     function shade10(rgb0, rgbCurrent){
-        return rgbCurrent - Math.floor(rgb0*0.1); //10% darker from initial color, rgb(0, 0, 0) = pitch black
+        let darkerRGB = rgbCurrent - Math.floor(rgb0*0.1); //10% darker from initial color, rgb(0, 0, 0) = pitch black
+        if (darkerRGB < 0) {
+            return 0;
+        } else {
+            return darkerRGB;
+        }
     }
 
     function getRGB(stringRGB){
@@ -66,7 +71,6 @@
         let nuGreen = shade10(rgb0[1], rgbCurrent[1]);
         let nuBlue = shade10(rgb0[2], rgbCurrent[2]);
         let newRGB = "rgb("+nuRed+", "+nuGreen+", "+nuBlue+")";
-        console.log(newRGB);
         return newRGB;
     }
 
@@ -109,17 +113,24 @@
         hover.forEach(function(hovered) {
             hovered.style.backgroundColor = event.target.value;
             defaultColor = event.target.value;
+            if (hovered.dataset.firstColor){
+                hovered.dataset.firstColor = hovered.style.backgroundColor;
+            }
         });
     }
 
     function boxCountText(boxCount){
         let p = document.querySelector('p');
-        p.innerHTML = `Current box : ${boxCount} x ${boxCount}`;
+        if (randomToggle){
+            p.innerHTML = `Current box : ${boxCount} x ${boxCount} Randomize : ON`;
+        } else {
+            p.innerHTML = `Current box : ${boxCount} x ${boxCount} Randomize : OFF`;
+        }
     }
 
     function toggleRandom(){
         randomToggle = !randomToggle;
-        console.log("a"+randomToggle);
+        boxCountText(boxCount);
     }
 
     let coloring;
