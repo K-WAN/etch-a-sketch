@@ -51,12 +51,37 @@
         }        
     }    
 
+    function shade10(rgb0, rgbCurrent){
+        return rgbCurrent - Math.floor(rgb0*0.1); //10% darker from initial color, rgb(0, 0, 0) = pitch black
+    }
+
+    function getRGB(stringRGB){
+        return stringRGB.slice(4, stringRGB.length-1).replace(/\s/g, '').split(",");
+    }
+
+    function beDarker(firstColor, currentColor){        
+        let rgb0 = getRGB(firstColor);
+        let rgbCurrent = getRGB(currentColor);
+        let nuRed = shade10(rgb0[0], rgbCurrent[0]);
+        let nuGreen = shade10(rgb0[1], rgbCurrent[1]);
+        let nuBlue = shade10(rgb0[2], rgbCurrent[2]);
+        let newRGB = "rgb("+nuRed+", "+nuGreen+", "+nuBlue+")";
+        console.log(newRGB);
+        return newRGB;
+    }
+
     function highlightBox(e){
         e.target.classList.add('hovered');
-        if (randomToggle){
-            e.target.style.backgroundColor = "#"+Math.floor(Math.random()*16777215).toString(16);
+        if (!e.target.style.backgroundColor){
+            if (randomToggle){
+                e.target.style.backgroundColor = "#"+Math.floor(Math.random()*16777215).toString(16);
+                this.dataset.firstColor = e.target.style.backgroundColor;
+            } else {
+                e.target.style.backgroundColor = defaultColor;
+                this.dataset.firstColor = e.target.style.backgroundColor;
+            }
         } else {
-            e.target.style.backgroundColor = defaultColor;
+            e.target.style.backgroundColor = beDarker(this.dataset.firstColor, e.target.style.backgroundColor);
         }
     }
 
