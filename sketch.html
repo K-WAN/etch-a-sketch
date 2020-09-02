@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="style.css"> 
 </head> 
 <body>
-<p>Default Box: 10 x 10 Randomize OFF</p>
+<p>Default Box: 10 x 10 Randomize <span style='color: red;'>OFF</span></p>
 <div id="container"></div>
 <div class="button-controller">
-    <button type="button" id="reset">RESET</button>
-    <button type="button" id="changeBoxesCount">Change</button>
-    <input type="color" id="colorChange">
-    <button type="button" id="randomColor">Random</button>
+    <button class="button" type="button" id="reset">RESET</button>
+    <button class="button" type="button" id="changeBoxesCount">Change</button>
+    <input class="button" type="color" id="colorChange">
+    <button class="button" type="button" id="randomColor">Random</button>
 </div>
 <script>    
     function changeBoxesCount(){
@@ -122,9 +122,9 @@
     function boxCountText(boxCount){
         let p = document.querySelector('p');
         if (randomToggle){
-            p.innerHTML = `Current box : ${boxCount} x ${boxCount} Randomize : ON`;
+            p.innerHTML = `Current box : ${boxCount} x ${boxCount} Randomize : <span style='color: green;'>ON</span>`;
         } else {
-            p.innerHTML = `Current box : ${boxCount} x ${boxCount} Randomize : OFF`;
+            p.innerHTML = `Current box : ${boxCount} x ${boxCount} Randomize : <span style='color: red;'>OFF</span>`;
         }
     }
 
